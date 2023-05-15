@@ -1,0 +1,42 @@
+Prcatical No.- 24
+Developed by - Yash Mete
+Date and Time -
+
+Input - 
+import java.util.*;
+public class HowManyFibs {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        List<Long> fibs = new ArrayList<>();
+        long f1 = 1;
+        long f2 = 1;
+        while (f1 <= 1000000000000000000L) {
+            fibs.add(f1);
+            long temp = f2;
+            f2 = f1 + f2;
+            f1 = temp;
+        }
+        while (sc.hasNext()) {
+            long a = sc.nextLong();
+            long b = sc.nextLong();
+            int count = 0;
+            for (long fib : fibs) {
+                if (fib >= a && fib <= b) {
+                    count++;
+                } else if (fib > b) {
+                    break;
+                }
+            }
+            System.out.println(count);
+        }
+    }
+}
+
+
+Output -
+1 2
+3
+3 5
+2
+0 0
+0

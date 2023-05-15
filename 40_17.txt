@@ -1,0 +1,57 @@
+Prcatical No.- 17
+Developed by - Yash Mete
+Date and Time -
+
+Input - 
+import java.util.*;
+public class Bridge {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] speeds = new int[n];
+        int[] weights = new int[n];
+        for (int i = 0; i < n; i++) {
+            speeds[i] = sc.nextInt();
+        }
+        for (int i = 0; i < n; i++) {
+            weights[i] = sc.nextInt();
+        }
+        Car[] cars = new Car[n];
+        for (int i = 0; i < n; i++) {
+            cars[i] = new Car(speeds[i], weights[i]);
+        }
+        Arrays.sort(cars);
+        int maxWeight = 0;
+        for (int i = 0; i < n; i++) {
+            if (maxWeight + cars[i].weight <= 50) {
+                maxWeight += cars[i].weight;
+            } else {
+                break;
+            }
+        }
+        System.out.println(maxWeight);
+    }
+    static class Car implements Comparable<Car> {
+        int speed;
+        int weight;
+        Car(int speed, int weight) {
+            this.speed = speed;
+            this.weight = weight;
+        }
+        @Override
+        public int compareTo(Car other) {
+            return Integer.compare(this.speed, other.speed);
+        }
+    }
+}
+
+
+Output -
+4
+
+50 40 10 20
+
+1 2 3 4
+
+
+10

@@ -1,0 +1,39 @@
+Prcatical No.- 1
+Developed by - Yash Mete
+Date and Time -
+
+Input - 
+import java.util.Scanner;  
+public class ThreeNPlusOneProblem  
+{  
+public static void main(String args[])    
+{       
+int N;   
+int count;   
+Scanner sc=new Scanner(System.in);  
+System.out.print("Enter the starting point for the sequence of the numbers: ");  
+N=sc.nextInt();  
+while (N <= 0)   
+{  
+System.out.println("Please re-enter the number beacuse The starting point must be positive.: ");  
+N=sc.nextInt();  
+}  
+count = 0;  
+while (N != 1)   
+{  
+if (N % 2 == 0)  
+N = N / 2;  
+else  
+N = 3 * N + 1;  
+System.out.print(N + "\t");  
+count = count + 1;  
+}  
+System.out.println();  
+System.out.println("There are "+count+" terms in the sequence of the numbers.");  
+}
+} 
+
+Output -
+Enter the starting point for the sequence of the numbers: 22
+11	34	17	52	26	13	40	20	10	5	16	8	4	2	1	
+There are 15 terms in the sequence of the numbers.

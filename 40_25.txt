@@ -1,0 +1,14 @@
+Prcatical No.- 25
+Developed by - Yash Mete
+Date and Time -
+
+Input - 
+def calculate_land_pieces(lines):
+    return lines * (lines + 1) // 2 + 1
+num_lines = 5
+land_pieces = calculate_land_pieces(num_lines)
+print("Number of land pieces:", land_pieces)
+
+
+Output -
+Number of land pieces: 16

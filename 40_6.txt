@@ -1,0 +1,32 @@
+Prcatical No.- 6
+Developed by - Yash Mete
+Date and Time -
+
+Input - 
+import java.util.*;
+public class JollyJumper {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] sequence = new int[n];
+        boolean[] diff = new boolean[n - 1];
+        for (int i = 0; i < n; i++) {
+            sequence[i] = sc.nextInt();
+        }
+        for (int i = 1; i < n; i++) {
+            int absoluteDiff = Math.abs(sequence[i] - sequence[i-1]);
+            if (absoluteDiff < 1 || absoluteDiff > n - 1 || diff[absoluteDiff-1]) {
+                System.out.println("Not jolly");
+                return;
+            }
+            diff[absoluteDiff-1] = true;
+        }
+        System.out.println("Jolly");
+    }
+}
+
+
+Output -
+4
+1 2 3 4
+Not jolly

@@ -1,0 +1,43 @@
+Prcatical No.- 22
+Developed by - Yash Mete
+Date and Time -
+
+Input - 
+import java.util.Scanner;
+public class ReverseAndAdd {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt(); 
+        for (int i = 1; i <= t; i++) {
+            long n = sc.nextLong(); 
+            int iterations = 0; 
+            while (!isPalindrome(n)) { 
+                n = n + reverse(n);
+                iterations++; 
+            }
+            System.out.println(iterations + " " + n); 
+        }
+    }
+    public static boolean isPalindrome(long n) {
+        String str = Long.toString(n);
+        String reversedStr = new StringBuilder(str).reverse().toString();
+        return str.equals(reversedStr);
+    }
+    public static long reverse(long n) {
+        long reversed = 0;
+        while (n > 0) {
+            reversed = reversed * 10 + n % 10;
+            n /= 10;
+        }
+        return reversed;
+    }
+}
+
+Output -
+3
+24
+4358
+
+1 66
+
+7 2786872

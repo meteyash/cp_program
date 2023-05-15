@@ -1,0 +1,62 @@
+Prcatical No.- 18
+Developed by - Yash Mete
+Date and Time -
+
+Input - 
+import java.util.*;
+public class LongestNap {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int startTime = 10 * 60; 
+        int endTime = 18 * 60; 
+        boolean[] schedule = new boolean[endTime - startTime];
+        for (int i = 0; i < n; i++) {
+            int start = sc.nextInt() * 60 + sc.nextInt();
+            int end = sc.nextInt() * 60 + sc.nextInt();
+            for (int j = start - startTime; j < end - startTime; j++) {
+                schedule[j] = true;
+            }
+        }
+        int longestNap = 0;
+        int startNap = -1;
+        int endNap = -1;
+        int currentNap = 0;
+        for (int i = 0; i < schedule.length; i++) {
+            if (!schedule[i]) {
+                currentNap++;
+                if (currentNap > longestNap) {
+                    longestNap = currentNap;
+                    startNap = i;
+                    endNap = i + currentNap;
+                }
+            } else {
+                currentNap = 0;
+            }
+        }
+        if (longestNap == 0) {
+            System.out.println("Gonna have to work all day!");
+        } else {
+            int startHour = (startTime + startNap) / 60;
+            int startMinute = (startTime + startNap) % 60;
+            int endHour = (startTime + endNap - 1) / 60;
+            int endMinute = (startTime + endNap - 1) % 60;
+            System.out.printf("Best nap starts at %02d:%02d and lasts for %d minutes.\n", startHour, startMinute, longestNap);
+        }
+    }
+}
+
+
+Output -
+4
+
+10 00 12 00
+
+13 30 14 30
+
+14 30 15 30
+
+16 00 17 00
+
+
+Best nap starts at 13:29 and lasts for 90 minutes.

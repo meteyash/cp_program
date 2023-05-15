@@ -1,0 +1,34 @@
+Prcatical No.- 16
+Developed by - Yash Mete
+Date and Time -
+
+Input - 
+import java.util.*;
+public class VitosFamily {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt(); 
+        for (int i = 0; i < t; i++) {
+            int n = sc.nextInt(); 
+            int[] houses = new int[n];
+            for (int j = 0; j < n; j++) {
+                houses[j] = sc.nextInt();
+            }
+            Arrays.sort(houses);
+            int median = houses[n/2];
+            int distance = 0;
+            for (int j = 0; j < n; j++) {
+                distance += Math.abs(median - houses[j]);
+            }
+            System.out.println(distance);
+        }
+    }
+}
+
+Output -
+java -cp /tmp/i47UEuvYyj VitosFamily
+2
+3 1 2 3
+2
+4 1 4 2 3
+4

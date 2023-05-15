@@ -1,0 +1,36 @@
+Prcatical No.- 20
+Developed by - Yash Mete
+Date and Time -
+
+Input - 
+import java.util.*;
+public class Football {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.next();
+
+        int count = 1;
+        boolean danger = false;
+        for (int i = 1; i < s.length(); i++) {
+            if (s.charAt(i) == s.charAt(i-1)) {
+                count++;
+            } else {
+                count = 1;
+            }
+            if (count == 7) {
+                danger = true;
+                break;
+            }
+        }
+        if (danger) {
+            System.out.println("YES");
+        } else {
+            System.out.println("NO");
+        }
+    }
+}
+
+
+Output -
+0000011111
+NO

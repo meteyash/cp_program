@@ -1,0 +1,62 @@
+Prcatical No.- 9
+Developed by - Yash Mete
+Date and Time -
+
+Input - 
+import java.util.*;
+public class StackEmUp {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        String[] suits = { "Clubs", "Diamonds", "Hearts", "Spades" };
+        String[] ranks = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace" };
+        for (int i = 0; i < t; i++) {
+            int n = sc.nextInt();
+            int[][] shuffle = new int[n][52];
+            for (int j = 0; j < n; j++) {
+                for (int k = 0; k < 52; k++) {
+                    shuffle[j][k] = sc.nextInt() - 1; 
+                }
+            }
+            int[] deck = new int[52];
+            for (int j = 0; j < 52; j++) {
+                deck[j] = j;
+            }
+            for (int j = 0; j < n; j++) {
+                int[] newDeck = new int[52];
+                for (int k = 0; k < 52; k++) {
+                    newDeck[k] = deck[shuffle[j][k]];
+                }
+                deck = newDeck;
+            }
+            for (int j = 0; j < 52; j++) {
+                int suitIndex = deck[j] / 13;
+                int rankIndex = deck[j] % 13;
+                System.out.println(ranks[rankIndex] + " of " + suits[suitIndex]);
+            }
+            if (i != t - 1) {
+                System.out.println(); 
+            }
+        }
+    }
+}
+
+Output -
+2
+3 51 19 36 8 44 20 48 35 1 37 24 12 28 45 31 2 50 15 40 9 21 32 26 33 13 4 29 11 22 42 16 49 39 6 17 46 10 23 41 30 18 38 25 47 34 7 14 27 43 5
+4 40 8 36 35 38 16 4 10 21 47 29 15 39 30 22 6 25 24 17 33 18 28 11 51 14 2 19 1 20 32 41 9 26 43 12 44 42 27 3 31 34 13 50 23 45 37 46 7 48 5 49
+
+
+Jack of Clubs
+Ace of Clubs
+2 of Clubs
+3 of Clubs
+4 of Clubs
+5 of Clubs
+6 of Clubs
+7 of Clubs
+8 of Clubs
+9 of Clubs
+10 of Clubs
+Queen of Clubs
+King of

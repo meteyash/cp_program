@@ -1,0 +1,37 @@
+Prcatical No.- 14
+Developed by - Yash Mete
+Date and Time -
+
+Input - 
+from collections import deque
+def find_doublet(start_word, end_word, dictionary):
+    if start_word == end_word:
+        return [start_word]
+    queue = deque()
+    queue.append((start_word, [start_word]))
+    visited = set([start_word])
+    while queue:
+        current_word, path = queue.popleft()
+        for i in range(len(current_word)):
+            for letter in "abcdefghijklmnopqrstuvwxyz":
+                new_word = current_word[:i] + letter + current_word[i+1:]
+                if new_word in dictionary and new_word not in visited:
+                    if new_word == end_word:
+                        path.append(end_word)
+                        return path
+                    queue.append((new_word, path + [new_word]))
+                    visited.add(new_word)
+    return []
+start_word = "lead"
+end_word = "gold"
+dictionary = ["lead", "load", "goad", "gold"]
+
+path = find_doublet(start_word, end_word, dictionary)
+if path:
+    print("Doublet Path:", ' -> '.join(path))
+else:
+    print("No doublet path found.")
+
+
+Output -
+Doublet Path: lead -> load -> goad -> gold

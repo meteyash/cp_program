@@ -1,0 +1,17 @@
+Prcatical No.- 12
+Developed by - Yash Mete
+Date and Time -
+
+Input - 
+def where_is_waldorf():
+    locations = {
+        "Waldorf": "Waldorf is located in Charles County, Maryland, United States.",
+    }
+    query = input("Enter the name of a place: ")
+    location = locations.get(query, "Sorry, I don't have information about that place.")
+    print(location)
+where_is_waldorf()
+
+Output -
+Enter the name of a place: Maryland
+Sorry, I don't have information about that place.

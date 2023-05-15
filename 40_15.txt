@@ -1,0 +1,59 @@
+Prcatical No.- 15
+Developed by - Yash Mete
+Date and Time -
+
+Input - 
+import java.util.*;
+public class Fmt {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        boolean newParagraph = true;
+        while (sc.hasNextLine()) {
+            String line = sc.nextLine();
+            if (line.isEmpty()) {
+                System.out.println(line);
+                newParagraph = true;
+            } else {
+                String[] words = line.split(" ");
+                int len = 0;
+
+                for (String word : words) {
+                    if (len + word.length() <= 80) {
+                        if (newParagraph) {
+                            System.out.print("     ");
+                            len += 5;
+                        } else {
+                            System.out.print(" ");
+                            len++;
+                        }
+                        System.out.print(word);
+                        len += word.length();
+                        newParagraph = false;
+                    } else {
+                        System.out.println();
+                        System.out.print(word);
+                        len = word.length();
+                        newParagraph = false;
+                    }
+                }
+                System.out.println();
+            }
+        }
+    }
+}
+
+Output -
+The quick brown fox
+jumped over the lazy dog.
+
+This is a paragraph with multiple
+lines of text that need to be formatted
+properly.
+
+This paragraph starts with whitespace
+and should be indented accordingly.
+
+
+The quick brown fox jumped over the lazy dog.
+This is a paragraph with multiple lines of text that need to be formatted properly.
+This paragraph starts with whitespace and should be indented accordingly.

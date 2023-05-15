@@ -1,0 +1,41 @@
+Prcatical No.- 2
+Developed by - Yash Mete
+Date and Time -
+
+Input - 
+import java.util.*;
+public class The Trip {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] expenses = new int[n];
+        double total = 0.0;
+        for (int i = 0; i < n; i++) {
+            expenses[i] = sc.nextInt();
+            total += expenses[i];
+        }
+        double average = total / n;
+        double difference = 0.0;
+        for (int i = 0; i < n; i++) {
+            difference += Math.max(0, expenses[i] - average);
+        }
+        System.out.printf("$%.2f\n", difference);
+    }
+}
+
+
+Output -
+6 3
+
+0
+
+1
+
+3
+
+4
+
+7
+
+10
+$5.00

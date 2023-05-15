@@ -1,0 +1,47 @@
+Prcatical No.- 7
+Developed by - Yash Mete
+Date and Time -
+
+Input - 
+import java.util.*;
+public class Hartals {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        for (int i = 0; i < t; i++) {
+            int n = sc.nextInt();
+            int p = sc.nextInt();
+            int[] hartals = new int[p];
+            int count = 0;
+            for (int j = 0; j < p; j++) {
+                hartals[j] = sc.nextInt();
+            }
+            for (int j = 1; j <= n; j++) {
+                if (j % 7 != 0 && (j + 1) % 7 != 0) {
+                    boolean found = false;
+                    for (int k = 0; k < p; k++) {
+                        if (j % hartals[k] == 0) {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (found) {
+                        count++;
+                    }
+                }
+            }
+            System.out.println(count);
+        }
+    }
+}
+
+
+Output -
+2
+14 3
+3 4 8
+100 4
+12 15 25 40
+
+5
+15

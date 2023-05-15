@@ -1,0 +1,41 @@
+Prcatical No.- 23
+Developed by - Yash Mete
+Date and Time -
+
+Input -
+import java.util.*;
+public class ArcheologistsDilemma {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int originalN = n;
+        int count = 0;
+        Set<Integer> powers = new HashSet<>();
+        int digits = (int) Math.log10(n) + 1;
+        for (int i = digits; i <= digits + 1; i++) {
+            int m = (int) (n * Math.pow(10, i - digits));
+            while (m <= 2 * n) {
+                powers.add(m);
+                m *= 2;
+            }
+        }
+        for (int power : powers) {
+            int temp = power;
+            int tempCount = 0;
+            while (temp > 0) {
+                tempCount++;
+                temp /= 10;
+            }
+            if (power - originalN >= tempCount) {
+                count++;
+            }
+        }
+        System.out.println(count);
+    }
+}
+ 
+
+
+Output -
+365
+1

@@ -1,0 +1,96 @@
+Prcatical No.- 5
+Developed by - Yash Mete
+Date and Time -
+
+Input - 
+import java.util.*;
+public class AustralianVoting {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt(); 
+        sc.nextLine();
+        for (int i = 0; i < t; i++) {
+            int n = sc.nextInt(); 
+            sc.nextLine();
+            String[] candidates = new String[n];
+            for (int j = 0; j < n; j++) {
+                candidates[j] = sc.nextLine();
+            }
+            int[][] votes = new int[n][n];
+            while (true) {
+                String line = sc.nextLine();
+                if (line.equals("")) {
+                    break;
+                }
+                String[] parts = line.split(" ");
+                for (int j = 0; j < n; j++) {
+                    votes[Integer.parseInt(parts[j]) - 1][j]++;
+                }
+            }
+            int[] eliminated = new int[n];
+            int remaining = n;
+            while (true) {
+                int[] firstPlaceVotes = new int[n];
+                for (int j = 0; j < n; j++) {
+                    if (eliminated[j] == 0) {
+                        firstPlaceVotes[j] = votes[j][0];
+                    }
+                }
+                boolean majority = false;
+                for (int j = 0; j < n; j++) {
+                    if (eliminated[j] == 0 && firstPlaceVotes[j] > remaining / 2) {
+                        System.out.println(candidates[j]);
+                        majority = true;
+                        break;
+                    }
+                }
+                if (majority) {
+                    break;
+                }
+                int minVotes = Integer.MAX_VALUE;
+                for (int j = 0; j < n; j++) {
+                    if (eliminated[j] == 0 && firstPlaceVotes[j] < minVotes) {
+                        minVotes = firstPlaceVotes[j];
+                    }
+                }
+                if (remaining == 1) {
+                    for (int j = 0; j < n; j++) {
+                        if (eliminated[j] == 0) {
+                            System.out.println(candidates[j]);
+                            break;
+                        }
+                    }
+                    break;
+                }
+                for (int j = 0; j < n; j++) {
+                    if (eliminated[j] == 0 && firstPlaceVotes[j] == minVotes) {
+                        eliminated[j] = 1;
+                        remaining--;
+                    }
+                }
+                for (int j = 0; j < n; j++) {
+                    for (int k = 0; k < n; k++) {
+                        if (eliminated[k] == 1) {
+                            continue;
+                        }
+
+                        int voteIndex = 0;
+                        while (voteIndex < n && eliminated[votes[k][voteIndex] - 1] == 1) {
+                            voteIndex++;
+                        }
+
+                        if (voteIndex < n) {
+                            votes[k][voteIndex]++;
+                        }
+                    }
+                }
+            }
+
+            if (i != t - 1) {
+                System.out.println();
+            }
+        }
+    }
+}
+
+Output -

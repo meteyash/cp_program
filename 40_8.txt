@@ -1,0 +1,66 @@
+Prcatical No.- 8
+Developed by - Yash Mete
+Date and Time -
+
+Input - 
+import java.util.*;
+public class CryptKicker {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        sc.nextLine(); 
+        String[] dict = new String[n];
+        for (int i = 0; i < n; i++) {
+            dict[i] = sc.nextLine();
+        }
+        String encrypted = sc.nextLine();
+        String[] words = encrypted.split("\\s+"); 
+        Map<Character, Character> key = new HashMap<>(); 
+        StringBuilder sb = new StringBuilder(); 
+        boolean valid = true; 
+        for (String word : words) {
+            if (word.length() == 1) {
+                sb.append(word).append(" "); 
+                continue;
+            }
+            String decrypted = "";
+            for (char c : word.toCharArray()) {
+                if (key.containsKey(c)) {
+                    decrypted += key.get(c);
+                } else {
+                    decrypted += "_"; 
+                }
+            }
+            if (Arrays.stream(dict).anyMatch(decrypted::equals)) {
+                sb.append(decrypted).append(" ");
+            } else {
+                valid = false; 
+                break;
+            }
+        }
+        if (valid) {
+            System.out.println(sb.toString().trim());
+        } else {
+            System.out.println("No solution.");
+        }
+    }
+}
+
+
+Output -
+6
+and
+dick
+jane
+puff
+spot
+yertle
+
+bjvg xsb hxsn xsb qymm xsb rqat xsb pnetfn
+
+
+puff is _ _ ff
+spot is _ _ o_
+and is _ _ _
+jane is _ a_ _
+yertle is _ _ _ _le

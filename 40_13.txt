@@ -1,0 +1,36 @@
+Prcatical No.- 13
+Developed by - Yash Mete
+Date and Time -
+
+Input - 
+def decrypt_ciphertext(ciphertext, dictionary):
+    decrypted_words = []
+    ciphertext_length = len(ciphertext)
+    for word in ciphertext.split():
+        if len(word) != ciphertext_length:
+            continue
+        mapping = {}
+        decrypted_word = ""
+        for i in range(ciphertext_length):
+            if word[i] not in mapping:
+                mapping[word[i]] = dictionary[i]
+            elif mapping[word[i]] != dictionary[i]:
+                break
+            decrypted_word += mapping[word[i]]
+        if len(decrypted_word) == ciphertext_length:
+            decrypted_words.append(decrypted_word)
+    return decrypted_words
+def solve_crypt_kicker_2(ciphertext, dictionary):
+    decrypted_words = decrypt_ciphertext(ciphertext, dictionary)
+    if decrypted_words:
+        return decrypted_words
+    else:
+        return ["No solution found."]
+ciphertext = "eqnw gfwnoqgfqo"
+dictionary = ["the", "quick", "brown", "fox"]
+
+decrypted_words = solve_crypt_kicker_2(ciphertext, dictionary)
+print("Decrypted Words:", decrypted_words)
+
+Output -
+Decrypted Words: ['No solution found.']

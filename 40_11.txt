@@ -1,0 +1,32 @@
+Prcatical No.- 11
+Developed by - Yash Mete
+Date and Time -
+
+Input - 
+import java.util.*;
+public class WERTYU {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String keyboard = "`1234567890-=QWERTYUIOP[]\\ASDFGHJKL;'ZXCVBNM,./";
+        String line;
+        StringBuilder output;
+        while (sc.hasNextLine()) {
+            line = sc.nextLine();
+            output = new StringBuilder();
+            for (char c : line.toCharArray()) {
+                if (c == ' ') {
+                    output.append(c);
+                } else {
+                    int index = keyboard.indexOf(c) - 1;
+                    output.append(keyboard.charAt(index)); 
+                }
+            }
+            System.out.println(output.toString());
+        }
+    }
+}
+
+Output -
+O S, GOMR YPFSU/
+
+I AM FINE TODAY.
