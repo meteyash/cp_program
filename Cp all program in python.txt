@@ -1,0 +1,719 @@
+###3n+1
+x=int(input("Enter Number : "))
+
+print(x)
+while x!=1:
+ if x%2==0:
+  x=x//2
+  print(x)
+ else:
+  x=(x*3)+1
+  print(x)
+
+
+###the trip
+no_of_members = int(input("Enter no of members: "))
+money = [float(input(f"Money for member {i}: ")) for i in range(1, no_of_members + 1)]
+
+sum_money = sum(money)
+avg = sum_money / len(money)
+print("Average= ", avg)
+
+ans = 0.0
+for i in money:
+    ans += abs(avg - i)
+
+print("Result= ", ans / 2)
+
+
+###LCD number
+num = int(input("enter number"))
+l = []
+
+while num > 0:
+    number = num % 10
+    l.append(number)
+    num = int(num / 10)
+
+l.reverse()
+
+for number in l:
+    if number == 1:
+        print("  ")
+        print("| ")
+        print("| ")
+    elif number == 2:
+        print(" -- ")
+        print("   |")
+        print(" -- ")
+        print("|   ")
+        print(" -- ")
+    elif number == 3:
+        print(" -- ")
+        print("   |")
+        print(" -- ")
+        print("   |")
+        print(" -- ")
+    elif number == 4:
+        print("    ")
+        print("| | ")
+        print(" -- ")
+        print("   |")
+    elif number == 5:
+        print(" -- ")
+        print("|   ")
+        print(" -- ")
+        print("   |")
+        print(" -- ")
+    elif number == 6:
+        print(" -- ")
+        print("|   ")
+        print(" -- ")
+        print("|  |")
+        print(" -- ")
+    elif number == 7:
+        print(" -- ")
+        print("   |")
+        print("   |")
+    elif number == 8:
+        print(" -- ")
+        print("|  |")
+        print(" -- ")
+        print("|  |")
+        print(" -- ")
+    elif number == 9:
+        print(" -- ")
+        print("|  |")
+        print(" -- ")
+        print("   |")
+        print(" -- ")
+    elif number == 0:
+        print(" -- ")
+        print("|  |")
+        print("|  |")
+        print("|  |")
+        print(" -- ")
+
+
+###Graphical editor
+import tkinter as tk
+from tkinter import filedialog
+
+def open_file():
+    filepath = filedialog.askopenfilename(title="Open Image File")
+
+def save_file():
+    filepath = filedialog.asksaveasfilename(title="Save Image File")
+
+def create_editor():
+    root = tk.Tk()
+
+    canvas = tk.Canvas(root, width=500, height=500)
+    canvas.pack()
+
+    menubar = tk.Menu(root)
+    file_menu = tk.Menu(menubar, tearoff=0)
+    file_menu.add_command(label="Open", command=open_file)
+    file_menu.add_command(label="Save", command=save_file)
+    file_menu.add_separator()
+    file_menu.add_command(label="Exit", command=root.quit)
+    menubar.add_cascade(label="File", menu=file_menu)
+
+    root.config(menu=menubar)
+    root.mainloop()
+
+if __name__ == "__main__":
+    create_editor()
+
+
+###austrolian voting
+
+no_of_voters = int(input("Enter the number of Voters: "))
+no_of_candidates = int(input("Enter the number of Candidates: "))
+
+result = {}  ### A dictionary to store the votes for each voter
+count = []   ### A list to store the first vote from each voter
+ans = {}     ### A dictionary to count the occurrences of each candidate's votes
+
+### Taking votes from each voter for each candidate
+for i in range(no_of_voters):
+    for j in range(no_of_candidates):
+        if i in result.keys():
+            result[i].append(int(input(f"Enter votes of {i} voter for candidate {j}: ")))
+        else:
+            result[i] = [int(input(f"Enter votes of voter {i} for candidate {j}: "))]
+
+print("Votes for each voter:", result)
+
+### Counting the first vote from each voter
+for i in range(no_of_voters):
+    count.append(result[i][0])
+
+print("First votes from each voter:", count)
+
+### Counting the occurrences of each candidate's votes
+for i in count:
+    if i in ans.keys():
+        ans[i] += 1
+    else:
+        ans[i] = 1
+
+print("Vote counts for each candidate:", ans)
+
+values = list(ans.values())
+
+### Checking if there is a clear winner (i.e., a candidate with the most votes)
+if values.count(max(values)) == 1:
+    print("The winner is the candidate with votes:", max(values))
+else:
+    print("There is no clear winner. It's a tie!")
+
+
+###crypt kicker
+
+import random
+
+def scramble_word(word):
+    letters = list(word)
+    random.shuffle(letters)
+    scrambled = ''.join(letters)
+    return scrambled
+
+def crypt_kicker():
+    secret_word = input("Enter the secret word: ")
+    scrambled_word = scramble_word(secret_word)
+    print("Scrambled word: ", scrambled_word)
+    
+    while True:
+        guess = input("Enter your guess (or 'quit' to exit): ")
+        if guess == 'quit':
+            break
+        if guess == secret_word:
+            print("Congratulations! You guessed the word correctly.")
+            break
+        else:
+            print("Incorrect guess. Try again.")
+
+if __name__ == "__main__":
+    crypt_kicker()
+
+
+
+###Stack em up
+
+def stack_em_up(deck_size, instructions):
+    deck = list(range(1, deck_size + 1))
+
+    for instruction in instructions:
+        operation, *params = map(int, instruction.split())
+
+        if operation == 1:
+            deck[params[0] - 1], deck[params[1] - 1] = deck[params[1] - 1], deck[params[0] - 1]
+        elif operation == 2:
+            deck = deck[params[0]:] + deck[:params[0]]
+        elif operation == 3:
+            deck[params[0] - 1:params[1]] = list(reversed(deck[params[0] - 1:params[1]]))
+
+    return deck
+
+### User input
+deck_size = int(input("Enter the deck size: "))
+num_instructions = int(input("Enter the number of instructions: "))
+
+instructions = [input("Enter an instruction: ") for _ in range(num_instructions)]
+
+final_deck = stack_em_up(deck_size, instructions)
+print("Final Deck:", final_deck)
+
+
+###Erd` os number 
+
+from collections import deque
+
+def calculate_erdos_number(mathematicians, collaborations, target):
+    graph = {m: [] for m in mathematicians}
+    visited = {m: False for m in mathematicians}
+
+    for c in collaborations:
+        graph[c[0]].append(c[1])
+        graph[c[1]].append(c[0])
+
+    if target not in mathematicians:
+        return -1
+
+    queue = deque([(target, 0)])
+    visited[target] = True
+
+    while queue:
+        m, n = queue.popleft()
+        if m == 'Paul Erdős':
+            return n
+        for c in graph[m]:
+            if not visited[c]:
+                queue.append((c, n + 1))
+                visited[c] = True
+
+    return -1
+
+### User input
+n = int(input("Enter the number of mathematicians: "))
+mathematicians = [input(f"Enter the name of mathematician {i+1}: ") for i in range(n)]
+
+m = int(input("Enter the number of collaborations: "))
+collaborations = [input("Enter the collaboration (mathematician1 mathematician2): ").split() for _ in range(m)]
+
+target = input("Enter the target mathematician: ")
+
+erdos_number = calculate_erdos_number(mathematicians, collaborations, target)
+print(f"Erdős Number of {target}: {erdos_number}")
+
+
+###WERTYU
+
+def qwertyu(input_string):
+    qwertyu_mapping = {
+        'q': 'w', 'w': 'e', 'e': 'r', 'r': 't', 't': 'y', 'y': 'u',
+        'u': 'i', 'i': 'o', 'o': 'p', 'p': 'q', 'a': 's', 's': 'd',
+        'd': 'f', 'f': 'g', 'g': 'h', 'h': 'j', 'j': 'k', 'k': 'l',
+        'l': 'a', 'z': 'x', 'x': 'c', 'c': 'v', 'v': 'b', 'b': 'n',
+        'n': 'm', 'm': 'z'
+    }
+
+    output_string = ''
+    for char in input_string:
+        if char.lower() in qwertyu_mapping:
+            output_string += qwertyu_mapping[char.lower()].upper() if char.isupper() else qwertyu_mapping[char]
+        else:
+            output_string += char
+
+    return output_string
+
+input_text = input("Enter a string: ")
+result = qwertyu(input_text)
+print("QWERTYU result:", result)
+
+
+
+###Where’s waldorf?
+
+def abc():
+    locations = {
+        "pune": "Pune is located in Charles County, Maryland, United States."
+    }
+    query = input("Enter the name of a place: ")
+    location = locations.get(query.lower(), "Sorry, I don't have information about that place.")
+    print(location)
+
+abc()
+
+
+###Crypt Kicker II
+def xyz(ciphertext, dictionary):
+    decrypted_words = []
+    ciphertext_length = len(ciphertext)
+
+    for word in ciphertext.split():
+        if len(word) != ciphertext_length:
+            continue
+
+        mapping = {}
+        decrypted_word = ""
+
+        for i in range(ciphertext_length):
+            if word[i] not in mapping:
+                mapping[word[i]] = dictionary[i]
+            elif mapping[word[i]] != dictionary[i]:
+                break
+
+            decrypted_word += mapping[word[i]]
+
+        if len(decrypted_word) == ciphertext_length:
+            decrypted_words.append(decrypted_word)
+
+    return decrypted_words
+
+def solve_crypt_kicker_2(ciphertext, dictionary):
+    decrypted_words = xyz(ciphertext, dictionary)
+
+    if decrypted_words:
+        return decrypted_words
+    else:
+        return ["No solution found."]
+
+ciphertext = "eqnw gfwnoqgfqo"
+dictionary = ["the", "quick", "brown", "fox"]
+
+decrypted_words = solve_crypt_kicker_2(ciphertext, dictionary)
+print("Decrypted Words:", decrypted_words)
+
+
+
+###Doublets
+
+from collections import deque
+
+def find_doublet(start_word, end_word, dictionary):
+    queue = deque([(start_word, [start_word])])
+    visited = set([start_word])
+
+    while queue:
+        current_word, path = queue.popleft()
+
+        if current_word == end_word:
+            return path
+
+        for i in range(len(current_word)):
+            for letter in "abcdefghijklmnopqrstuvwxyz":
+                new_word = current_word[:i] + letter + current_word[i + 1:]
+
+                if new_word in dictionary and new_word not in visited:
+                    queue.append((new_word, path + [new_word]))
+                    visited.add(new_word)
+
+    return []
+
+### User input
+start_word, end_word, *dictionary = input("Enter start word, end word, and dictionary words (separated by spaces): ").split()
+
+path = find_doublet(start_word, end_word, dictionary)
+print("Doublet Path:", ' -> '.join(path) if path else "No doublet path found.")
+
+
+
+
+###FMT
+
+import textwrap
+
+def abc(text, width=70):
+    paragraphs = text.split('\n\n')
+
+    formatted_paragraphs = []
+    for paragraph in paragraphs:
+        wrapped_lines = textwrap.wrap(paragraph, width=width)
+        formatted_paragraphs.append('\n'.join(wrapped_lines))
+
+    return '\n\n'.join(formatted_paragraphs)
+
+input_text = """Lorem ipsum dolor sit amet, consectetur adipiscing
+elit. Sed pretium orci quis metus hendrerit, at convallis dolor
+vestibulum.
+Nulla sed mi a libero blandit tristique. Suspendisse potenti. Donec
+consequat libero et nisi tincidunt, in euismod sem efficitur.
+
+Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+posuere cubilia Curae; Sed ut purus dapibus, tristique mauris ut,
+aliquet erat. Sed eget sem at mi suscipit feugiat. Pellentesque eu
+risus justo. Morbi suscipit rhoncus velit, ut faucibus diam varius a.
+Fusce eleifend nunc in enim ultrices scelerisque."""
+
+formatted_text = abc(input_text)
+print("Formatted text:\n", formatted_text)
+
+
+
+
+###Vito’s family
+
+def vito_family(locations):
+    n = len(locations)
+    min_dist = float('inf')
+
+    for i in range(n):
+        distance = sum(abs(locations[j] - locations[i]) for j in range(n))
+        min_dist = min(min_dist, distance)
+
+    return min_dist
+
+### Example usage
+locations = list(map(int, input("Enter the locations: ").split()))
+result = vito_family(locations)
+print("Minimum distance:", result)
+
+
+
+
+###Bridge
+
+n = int(input("Number of people from A:"))
+a = [int(input(f'{i + 1}th time to pass the bridge: ')) for i in range(n)]
+aa = a.copy()
+b = []
+min1 = min(a)
+a.remove(min1)
+min2 = min(a)
+a.remove(min2)
+b.append(min1)
+b.append(min2)
+time = 0
+
+print("Minimum times:", min1, min2)
+
+def transfer(a, b):
+    min1 = min(b)
+    b.remove(min1)
+    min2 = min(a)
+    a.remove(min2)
+    print("Transferring:", min1, min2)
+
+while len(a) != 0:
+    transfer(a, b)
+    most_min = min(aa)
+    for i in aa:
+        time += most_min + i
+    aa.remove(most_min)
+
+print(f'Total Time Required to pass the Bridge is: {time}')
+
+
+
+###Longest nap
+
+from datetime import datetime, timedelta
+
+def calculate_longest_nap(schedule):
+    schedule.sort()
+    nap_start = datetime.strptime("10:00", "%H:%M")
+    longest_nap = timedelta()
+
+    next_activity_start = None
+
+    for activity_start, activity_end in schedule:
+        activity_start = datetime.strptime(activity_start, "%H:%M")
+        activity_end = datetime.strptime(activity_end, "%H:%M")
+        nap_duration = activity_start - nap_start
+        if nap_duration > longest_nap:
+            longest_nap = nap_duration
+        nap_start = activity_end
+
+    ### Check for the longest nap after the last activity until 18:00
+    end_of_day = datetime.strptime("18:00", "%H:%M")
+    last_nap_duration = end_of_day - nap_start
+    if last_nap_duration > longest_nap:
+        longest_nap = last_nap_duration
+
+    return longest_nap
+
+def main():
+    test_cases = int(input("Enter the number of test cases: "))
+
+    for i in range(1, test_cases + 1):
+        num_appointments = int(input(f"Enter the number of appointments for test case ###{i}: "))
+        schedule = []
+
+        for _ in range(num_appointments):
+            start, end = input("Enter the start and end time of the appointment (hh:mm hh:mm): ").split()
+            schedule.append((start, end))
+
+        longest_nap = calculate_longest_nap(schedule)
+        print(f"Day ###{i}: the longest nap duration is {longest_nap}")
+
+if __name__ == "__main__":
+    main()
+
+
+
+###Shell Sort
+
+def shell_sort(arr):
+    n = len(arr)
+    h = n // 2
+
+    while h > 0:
+        for i in range(h, n):
+            temp = arr[i]
+            j = i
+
+            while j >= h and arr[j - h] > temp:
+                arr[j] = arr[j - h]
+                j -= h
+
+            arr[j] = temp
+
+        h //= 2
+
+    return arr
+
+def main():
+    input_str = input("Enter a list of integers separated by spaces: ")
+    arr = list(map(int, input_str.split()))
+
+    sorted_arr = shell_sort(arr)
+    print("Sorted array:", sorted_arr)
+
+if __name__ == '__main__':
+    main()
+
+
+
+
+###Football
+
+
+class P:
+    def __init__(self, name, number):
+        self.name = name
+        self.number = number
+
+    def __str__(self):
+        return f"P {self.number}: {self.name}"
+
+class Team:
+    def __init__(self, name, players):
+        self.name = name
+        self.players = players
+
+    def __str__(self):
+        return f"Team: {self.name}\n" + '\n'.join(str(player) for player in self.players)
+
+class FootballGame:
+    def __init__(self, home_team, away_team):
+        self.home_team = home_team
+        self.away_team = away_team
+
+    def start(self):
+        print("Football Game Started!")
+        print("Home Team:", self.home_team.name)
+        print(self.home_team)
+        print("Away Team:", self.away_team.name)
+        print(self.away_team)
+
+### Example usage
+player1 = P("Alok", 10)
+player2 = P("Virat", 7)
+team1 = Team("RCB", [player1])
+team2 = Team("GT", [player2])
+
+game = FootballGame(team1, team2)
+game.start()
+
+
+
+
+###Primary Arithmetic
+
+def count_carry_operations(num1, num2):
+    carry_count = 0
+    carry = 0
+
+    while num1 != 0 or num2 != 0:
+        sum_digits = num1 % 10 + num2 % 10 + carry
+        if sum_digits >= 10:
+            carry = 1
+            carry_count += 1
+        else:
+            carry = 0
+
+        num1 //= 10
+        num2 //= 10
+
+    if carry_count == 0:
+        print("No carry operation.")
+    elif carry_count == 1:
+        print("1 carry operation.")
+    else:
+        print(f"{carry_count} carry operations.")
+
+def main():
+    while True:
+        num1, num2 = map(int, input("Enter two unsigned integers (0 0 to exit): ").split())
+        if num1 == 0 and num2 == 0:
+            break
+
+        count_carry_operations(num1, num2)
+
+if __name__ == '__main__':
+    main()
+
+
+
+###Reverse and Add
+def isPalindrome(s):
+    s = str(s)
+    if s == s[::-1]:
+        return s
+    else:
+        return 0
+
+n = int(input("Enter the number: "))
+while True:
+    a = isPalindrome(n)
+    if a:
+        print(f"The last addition where sum becomes a palindrome number is {a}")
+        break
+    else:
+        n = n + int(str(n)[::-1])
+
+
+
+
+###The Archaeologist’s Dilemma
+
+import math
+
+def abc(measurements):
+    smallest_number = float("inf")
+
+    for measurement in measurements:
+        percentage = math.ceil(math.log2(measurement)) + 1
+        original_number = math.ceil(measurement * 100 / percentage)
+        smallest_number = min(smallest_number, original_number)
+
+    return smallest_number
+
+### Example usage
+measurements = [2000, 5000, 1000]
+original_number = abc(measurements)
+print("Smallest Original Number:", original_number)
+
+
+###How many Fibs?
+def fibonacci_count(a, b):
+    count = 0
+    fib_prev = 1
+    fib_current = 2
+
+    while fib_current <= b:
+        if fib_current >= a:
+            count += 1
+
+        fib_next = fib_prev + fib_current
+        fib_prev = fib_current
+        fib_current = fib_next
+
+    return count
+
+def main():
+    while True:
+        a, b = map(int, input("Enter two non-negative integers (0 0 to exit): ").split())
+        if a == 0 and b == 0:
+            break
+
+        count = fibonacci_count(a, b)
+        print(count)
+
+if __name__ == '__main__':
+    main()
+
+
+
+###How many pieces of Land?
+
+def calculate_max_land_pieces(n):
+    if n == 0:
+        return 1
+    else:
+        return n * (n - 1) // 2 + 1
+
+def main():
+    s = int(input("Enter the number of sets of input: "))
+
+    for _ in range(s):
+        n = int(input("Enter the number of points on the boundary: "))
+
+        max_pieces = calculate_max_land_pieces(n)
+        print(max_pieces)
+
+if __name__ == '__main__':
+    main()
+
